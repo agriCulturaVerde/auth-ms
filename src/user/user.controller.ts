@@ -10,24 +10,26 @@ export class UserController {
 
   @MessagePattern('createUser')
   create(@Payload() createUserDto: CreateUserDto) {
-    return createUserDto;
-    // return this.userService.create(createUserDto);
+    return this.userService.create(createUserDto);
   }
 
   @MessagePattern('findUserByEmail')
   findOne(@Payload() email: string) {
-    return email;
-    // return this.userService.findOne(id);
+    return this.userService.findUserByEmail(email);
+  }
+
+  @MessagePattern('findAllUsers')
+  findAll() {
+    return this.userService.findAll();
   }
 
   @MessagePattern('updateUser')
   update(@Payload() updateUserDto: UpdateUserDto) {
-    return updateUserDto;
-    // return this.userService.update(updateUserDto.id, updateUserDto);
+    return this.userService.update(updateUserDto.id, updateUserDto);
   }
 
   @MessagePattern('removeUser')
-  remove(@Payload() id: number) {
+  remove(@Payload() id: string) {
     return this.userService.remove(id);
   }
 }
